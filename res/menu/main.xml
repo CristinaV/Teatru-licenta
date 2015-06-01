@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.teatrulcaracalean.MainActivity" >
+
+    <item
+        android:id="@+id/sign"
+        android:orderInCategory="100"
+        android:title="@string/sign"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/log"
+        android:orderInCategory="200"
+        android:title="@string/log"
+        app:showAsAction="never"/>
+    
+     <item
+        android:id="@+id/utilizator"
+        android:orderInCategory="300"
+        android:title="sds"
+        android:visible="false"
+        app:showAsAction="always"/>
+    
+</menu>

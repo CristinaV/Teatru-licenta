@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/biografii">
+
+    <Button
+        android:id="@+id/btnactori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/actori"
+        android:onClick="goToActori" />
+
+    <Button
+        android:id="@+id/btnregizori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/regizori"
+        android:onClick="goToRegizori" />
+
+    <Button
+        android:id="@+id/btnscenografi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/scenografi"
+        android:onClick="goToScenografi" />
+
+</LinearLayout>

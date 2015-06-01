@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Teatrul Caracalean</string>
+    <string name="exit">Iesire</string>
+    <string name="despre">Despre Teatru</string>
+    <string name="contact">Contact</string>
+    <string name="istoric"> Istoricul Teatrului</string>
+    <string name = "log" >Conectare</string>
+    <string name = "sign">Inregistrare</string>
+    <string name= "biografii">Biografii</string>
+    <string name="rezervare">Rezervare bilet</string>
+    <string name="actori">Actori</string>
+    <string name="scenografi">Scenografi</string>
+    <string name="regizori">Regizori</string>
+
+    <!-- Log in si sign up -->
+	<string name="email">Email</string>
+    <string name="confirma_parola">Confirma parola</string>
+    <string name="anul_nasterii">Anul nasterii</string>
+    <string name="conecteaza_te">Conecteaza-te</string>
+    <string name="dejaMembru">Esti deja membru? Conecteaza-te!</string>
+    <string name="reincearca">Reincearca</string>
+    <string name="textspinner"></string>
+    <string name="salveaza_cont">Creeaza cont</string>
+    <string name="nume">Nume</string>
+    <string name="prenume">Prenume</string>
+    <string name="telefon">Telefon</string>
+    <string name="user">User</string>
+    <string name="parola">Parola</string>
+    <string name="adresa_mail">Adresa de e-mail</string>
+    <string name="indicatii_parola">* Parola trebuie sa contina litere mari si mici, cel putin o cifra, cel putin unul dintre caracterele @,#,$ si % si sa aiba cel putin 6 caractere"</string>   
+</resources>
