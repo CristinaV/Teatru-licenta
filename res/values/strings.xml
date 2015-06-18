@@ -14,6 +14,7 @@
     <string name="scenografi">Scenografi</string>
     <string name="regizori">Regizori</string>
 
+
     <!-- Log in si sign up -->
 	<string name="email">Email</string>
     <string name="confirma_parola">Confirma parola</string>
@@ -30,4 +31,10 @@
     <string name="parola">Parola</string>
     <string name="adresa_mail">Adresa de e-mail</string>
     <string name="indicatii_parola">* Parola trebuie sa contina litere mari si mici, cel putin o cifra, cel putin unul dintre caracterele @,#,$ si % si sa aiba cel putin 6 caractere"</string>   
+
+	<string-array name="descriere">
+	    <item>Adresa: Str. Cuza Voda, nr. 10, Caracal, jud. Olt Tel. 0249.512.067 Telefon: 0249.512.06 Fax: 0249.512.067</item>
+		<item>Aici va fi istoricul teatrului</item>
+	</string-array>
+    
 </resources>

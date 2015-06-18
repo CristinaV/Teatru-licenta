@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
-	public final static String DATABASE_NAME = "teatru.db";
 	private SQLiteDatabase db;
 	//log in si sign up
 	private ArrayList<Utilizator> utilizatori = new ArrayList<Utilizator>();
@@ -28,14 +27,17 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		File caleDb = this.getDatabasePath(MainActivity.DATABASE_NAME);
+		File caleDb = this.getDatabasePath(DespreDB.DATABASE_NAME);
 		File dirDb = caleDb.getParentFile();
 		if (!dirDb.exists()) {
 			dirDb.mkdir();
 		}
 		db = SQLiteDatabase.openOrCreateDatabase(caleDb, null);
-		db.execSQL("CREATE TABLE IF NOT EXISTS utilizatori (idUtil INTEGER PRIMARY KEY AUTOINCREMENT, nume TEXT, "
-				+ "telefon INTEGER, anNastere INTEGER,email TEXT,parola TEXT)");
+//		db.execSQL("CREATE TABLE IF NOT EXISTS utilizatori (idUtil INTEGER PRIMARY KEY AUTOINCREMENT, nume TEXT, "
+//				+ "telefon INTEGER, anNastere INTEGER,email TEXT,parola TEXT)");
+//		db.execSQL("CREATE TABLE IF NOT EXISTS actori(idActor INTEGER PRIMARY KEY AUTOINCREMENT, numeActor TEXT, " +
+//				"biografieActor TEXT)");
+		
 		db.close();
 	}
 
@@ -68,6 +70,10 @@ public class MainActivity extends ActionBarActivity {
 			Intent i = new Intent(this, Conectare.class);
 			i.putExtra("utilizatori", utilizatori);
 			startActivityForResult(i, 1);
+		}
+		
+		if(id == R.id.exit){
+			finish();
 		}
 
 		return super.onOptionsItemSelected(item);
