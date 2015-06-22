@@ -1,38 +1,63 @@
 package com.example.teatrulcaracalean;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class ListaActori extends MainActivity{
-	private List<String> actori;
-	private ListView listView;
-	private ArrayAdapter<String> adaptor;
-	private List<String> listAdaptor;
-	private HelperBD db;
+public class ListaActori extends MainActivity {
+
+	private DatabaseController dbc;
+	ListView lv;
+	ArrayList<Actor> actori;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_actori);
-		
-		db = new HelperBD(this);
-		actori = db.getActori();
-		if(actori!=null){
-			listAdaptor = new ArrayList<String>();
-			adaptor = new ArrayAdapter<String>(ListaActori.this, android.R.layout.simple_list_item_1,listAdaptor);
-			for(String actor: actori){
-				listAdaptor.add(actor);
-				adaptor.notifyDataSetChanged();
-			}
-			listView = (ListView) findViewById(R.id.lista_actori);
-			listView.setAdapter(adaptor);
-		}
-		
-	}
+		dbc = new DatabaseController(getApplicationContext());
 	
+		actori = new ArrayList<Actor>();
+		
+		dbc.inserareActor(new Actor(1,"Mihai Bendeac","Aici este biografia lui Mihai Bendeac"));
+		dbc.inserareActor(new Actor(2, "Stefan Banica Jr","Aici este o biografie"));
+		actori = dbc.getNumeActor();
+		String[] act = new String[actori.size()];
+		for(int i=0; i<actori.size();i++){
+			act[i] = actori.get(i).toString();
+		}
+
+		lv = (ListView)findViewById(R.id.lista_actori);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListaActori.this, android.R.layout.simple_list_item_1,android.R.id.text1, act);
+		lv.setAdapter(adapter);
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				actori = dbc.getBiografieActor();
+
+				String[] biografie = new String[actori.size()];
+				for(int i=0; i<actori.size();i++){
+					biografie[i] = actori.get(i).toString();
+				}
+				final String biografieActor = biografie[position];
+				
+				Intent i = new Intent(getApplicationContext(), BiografiiListaActori.class);
+				i.putExtra("biografieActor", biografieActor);
+				startActivity(i);
+			}
+			
+		});
+	}
+
 	
 }

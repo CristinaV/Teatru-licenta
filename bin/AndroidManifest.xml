@@ -23,12 +23,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".Despre"/>
-        <activity android:name=".Contact"/>
-        <activity android:name=".IstoricTeatru"/>
         <activity android:name=".Conectare"/>
         <activity android:name=".CreeazaCont"/>
         <activity android:name=".Biografii"/>
+        <activity android:name=".ListaActori"/>
+        <activity android:name=".ListDespre"/>
         <activity android:name=".Rezervare"/>
+        <activity android:name=".PiesaDetalii"/>
+        <activity android:name=".BiografiiListaActori"/>
+       
+    
     </application>
 
 </manifest>

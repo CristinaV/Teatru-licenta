@@ -3,10 +3,14 @@ package com.example.teatrulcaracalean;
 import java.io.File;
 import java.util.ArrayList;
 
+
+
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
+	
 	private SQLiteDatabase db;
 	//log in si sign up
 	private ArrayList<Utilizator> utilizatori = new ArrayList<Utilizator>();
@@ -27,18 +32,14 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		File caleDb = this.getDatabasePath(DespreDB.DATABASE_NAME);
+		File caleDb = this.getDatabasePath(DatabaseController.DATABASE_NAME);
 		File dirDb = caleDb.getParentFile();
 		if (!dirDb.exists()) {
 			dirDb.mkdir();
 		}
-		db = SQLiteDatabase.openOrCreateDatabase(caleDb, null);
-//		db.execSQL("CREATE TABLE IF NOT EXISTS utilizatori (idUtil INTEGER PRIMARY KEY AUTOINCREMENT, nume TEXT, "
-//				+ "telefon INTEGER, anNastere INTEGER,email TEXT,parola TEXT)");
-//		db.execSQL("CREATE TABLE IF NOT EXISTS actori(idActor INTEGER PRIMARY KEY AUTOINCREMENT, numeActor TEXT, " +
-//				"biografieActor TEXT)");
-		
-		db.close();
+//		db = SQLiteDatabase.openOrCreateDatabase(caleDb, null);
+//				
+//		db.close();
 	}
 
 	@Override
@@ -57,9 +58,6 @@ public class MainActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if(id == R.id.sign){
 			Intent i = new Intent(this, CreeazaCont.class);

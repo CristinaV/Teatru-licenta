@@ -11,8 +11,13 @@ public class Scenograf implements Serializable {
 	
 	public Scenograf() {
 	}
+	
+	public Scenograf(String nume){
+		this.nume = nume;
+	}
 
-	public Scenograf(String nume, String biografie) {
+	public Scenograf(int id, String nume, String biografie) {
+		this.id = id;
 		this.nume = nume;
 		this.biografie = biografie;
 	}
@@ -39,6 +44,11 @@ public class Scenograf implements Serializable {
 
 	public void setBiografie(String biografie) {
 		this.biografie = biografie;
+	}
+
+	@Override
+	public String toString() {
+		return nume;
 	}
 	
 	

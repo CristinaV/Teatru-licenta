@@ -1,5 +1,11 @@
 package com.example.teatrulcaracalean;
 
+import com.example.teatrulcaracalean.R;
+import com.example.teatrulcaracalean.R.array;
+import com.example.teatrulcaracalean.R.id;
+import com.example.teatrulcaracalean.R.layout;
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,10 +38,10 @@ public class Despre extends MainActivity {
 					int position, long id) {
 				
 				String[] descriere = getResources().getStringArray(R.array.descriere);
-				final String descrierelabel = descriere[position];
+				final String descriereLabel = descriere[position];
 				
 				Intent i = new Intent(getApplicationContext(), ListDespre.class);
-				i.putExtra("descrierelabel", descrierelabel);
+				i.putExtra("descriereLabel", descriereLabel);
 				startActivity(i);
 			}
 			

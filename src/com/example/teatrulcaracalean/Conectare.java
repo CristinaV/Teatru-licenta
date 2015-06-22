@@ -30,8 +30,8 @@ public class Conectare extends MainActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_conectare);
 		
-		File caleDb=this.getDatabasePath(MainActivity.DATABASE_NAME);
-        caleDb=Conectare.this.getDatabasePath(MainActivity.DATABASE_NAME);
+		File caleDb=this.getDatabasePath(DatabaseController.DATABASE_NAME);
+        caleDb=Conectare.this.getDatabasePath(DatabaseController.DATABASE_NAME);
         db=SQLiteDatabase.openOrCreateDatabase(caleDb, null);
 		
       //  LoadUtilizatoriAsync loader=new LoadUtilizatoriAsync();

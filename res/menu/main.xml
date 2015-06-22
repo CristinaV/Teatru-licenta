@@ -21,5 +21,13 @@
         android:title="sds"
         android:visible="false"
         app:showAsAction="always"/>
+     
+     
+     <item
+        android:id="@+id/exit"
+        android:orderInCategory="400"
+        android:title="sds"
+        android:visible="false"
+        app:showAsAction="always"/>
     
 </menu>

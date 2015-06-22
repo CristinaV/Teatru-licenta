@@ -11,8 +11,14 @@ public class Actor implements Serializable{
 	
 	public Actor() {
 	}
+	
+	public Actor(String nume){
+		this.nume = nume;
+	}
 
-	public Actor(String nume, String biografie) {
+	public Actor(int id, String nume, String biografie) {
+		super();
+		this.id = id;
 		this.nume = nume;
 		this.biografie = biografie;
 	}
@@ -39,6 +45,11 @@ public class Actor implements Serializable{
 
 	public void setBiografie(String biografie) {
 		this.biografie = biografie;
+	}
+
+	@Override
+	public String toString() {
+		return nume;
 	}
 	
 	

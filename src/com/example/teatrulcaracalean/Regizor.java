@@ -11,8 +11,13 @@ public class Regizor implements Serializable{
 	
 	public Regizor() {
 	}
+	
+	public Regizor(String nume){
+		this.nume = nume;
+	}
 
-	public Regizor(String nume, String biografie) {
+	public Regizor(int id, String nume, String biografie) {
+		this.id = id;
 		this.nume = nume;
 		this.biografie = biografie;
 	}
@@ -40,6 +45,10 @@ public class Regizor implements Serializable{
 	public void setBiografie(String biografie) {
 		this.biografie = biografie;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return  nume;
+	}
+
 }

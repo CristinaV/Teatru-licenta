@@ -48,7 +48,7 @@ public class CreeazaCont extends MainActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_log);
 		
-		caleDb=CreeazaCont.this.getDatabasePath(MainActivity.DATABASE_NAME);
+		caleDb=CreeazaCont.this.getDatabasePath(DatabaseController.DATABASE_NAME);
 		
 		db=SQLiteDatabase.openOrCreateDatabase(caleDb, null);
 		LoadUtilizatoriAsync loader=new LoadUtilizatoriAsync();
@@ -93,14 +93,6 @@ public class CreeazaCont extends MainActivity{
 				else{
 					et6.setBackgroundColor(getResources().getColor(R.color.red));enable6=false;
 				}
-			/*	if(s.length()==10  && !et.getText().toString().equals("") && !et2.getText().toString().equals("") && !et3.getText().toString().equals("") && !et4.getText().toString().equals("") && !et5.getText().toString().equals("")){
-			      //  b.setEnabled(true);	
-			        enable6=true;
-				}
-				else{
-				 //	b.setEnabled(false);
-					enable6=false;
-				}*/
 
 				b.setEnabled(enable1 && enable2 && enable3 && enable4 && enable5 && enable6 && enable7);
 			}
@@ -119,14 +111,6 @@ public class CreeazaCont extends MainActivity{
 			@Override
 			public void afterTextChanged(Editable s) {
 				final String email=et.getText().toString();
-			/*	if(email.matches(emailPattern) && s.length()>0  && !et6.getText().toString().equals("") && !et2.getText().toString().equals("") && !et3.getText().toString().equals("") && !et4.getText().toString().equals("") && !et5.getText().toString().equals("")){
-			      //  b.setEnabled(true);	
-			        enable1=true;
-				}
-				else{
-					//b.setEnabled(false);
-					enable1=false;
-				}*/
 				if(email.matches(emailPattern)){
 					et.setBackgroundColor(getResources().getColor(R.color.green));enable1=true;
 				}
@@ -179,15 +163,6 @@ public class CreeazaCont extends MainActivity{
 			public void afterTextChanged(Editable s) {
 				final String parola1=et2.getText().toString();
 				final String parola2=et3.getText().toString();
-			/*	if(s.equals(parola1) && s.length()!=0  && !et6.getText().toString().equals("") && !et2.getText().toString().equals("") && !et.getText().toString().equals("") && !et4.getText().toString().equals("") && !et5.getText().toString().equals("")){
-		        //	b.setEnabled(true);
-					enable3=true;
-		        }
-		        else{
-		        //	b.setEnabled(false);
-		        	enable3=false;
-		        }*/
-
 				if(parola2.equals(parola1)){
 					et3.setBackgroundColor(getResources().getColor(R.color.green));enable3=true;
 				}
@@ -229,19 +204,7 @@ public class CreeazaCont extends MainActivity{
 					et4.setError("Numele poate contine doar litere, - si spatiu");
 					et4.setBackgroundColor(getResources().getColor(R.color.red));enable4=false;
 				}
-				
-			/*	if( s.length()>0 && !et6.getText().toString().equals("") && !et2.getText().toString().equals("") && !et3.getText().toString().equals("") && !et.getText().toString().equals("") && !et5.getText().toString().equals("")){	       
-			       if(ok==1)
-					//b.setEnabled(true);
-			    	   enable4=true;
-			       else
-			    	 //  b.setEnabled(false);
-			    	   enable4=false;
-				}
-				else{
-					//b.setEnabled(false);
-					enable4=false;
-				}*/
+			
 				b.setEnabled(enable1 && enable2 && enable3 && enable4 && enable5 && enable6 && enable7);
 			}
 		});
@@ -387,8 +350,7 @@ public class CreeazaCont extends MainActivity{
 
 	public void dejaMembru(View v){
 		Intent i=new Intent(this,Conectare.class);
-		startActivityForResult(i, 2); //in activitatea Conectare nu pot apasa pe buton, pt ca nu am trimis nicio lista cu utilizatori;
-		//cand vom avea BD va merge
+		startActivityForResult(i, 2); 
 	}
 	
 	 public void onActivityResult(int requestCode, int resultCode, Intent intent){
@@ -402,7 +364,6 @@ public class CreeazaCont extends MainActivity{
 	    			String email=extras.getString("email");
 	    			Intent i=new Intent();
 	    			System.out.println(id+"    "+email);
-	    		//	i.putExtra("id", id);
 	    			i.putExtra("email", email);
 	    			setResult(RESULT_CANCELED, i);
 	    			finish();
