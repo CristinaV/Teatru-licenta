@@ -39,24 +39,31 @@ public class Rezervare extends MainActivity{
 		
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
+			
+			
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				piese = dbc.getPiesa();
-
-				String[] spect = new String[piese.size()];
-				for(int i=0; i<piese.size();i++){
-					spect[i] = piese.get(i).toString();
-				}
-				final String detaliiSpect = spect[position].toString();
+//				piese = dbc.getPiesa();
+//
+//				String[] spect = new String[piese.size()];
+//				for(int i=0; i<piese.size();i++){
+//					spect[i] = piese.get(i).toString();
+//				}
+//				final String detaliiSpect = spect[position].toString();
 				
-				Intent i = new Intent(getApplicationContext(), PiesaDetalii.class);
-				i.putExtra("detaliiSpect", detaliiSpect);
+				Intent i = new Intent(getApplicationContext(), Afisare_diagrama.class);
+//				i.putExtra("detaliiSpect", detaliiSpect);
 				startActivity(i);
 			}
 			
 		});
+	}
+	
+	public void goToSala(View v){
+		Intent i = new Intent(this, Afisare_diagrama.class);
+		startActivity(i);
 	}
 
 }

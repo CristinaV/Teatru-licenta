@@ -20,7 +20,7 @@ public class DatabaseController extends SQLiteOpenHelper {
 	private static final String TABELA_SCENOGRAFI = "scenografi";
 	private static final String TABELA_REGIZORI = "regizori";
 	private static final String TABELA_PIESE = "piese";
-	private static final String TABELA_SALA = "sala";
+	private static final String TABELA_LOCURI_SALA = "locuri_sala";
 	private static final String TABELA_LOCURI_OCUPATE ="locuri_ocupate";
 	private static final String TABELA_REZERVARE = "rezervare";
 	
@@ -56,18 +56,14 @@ public class DatabaseController extends SQLiteOpenHelper {
 	private static final String PRET = "pret";
 	private static final String DETALII = "detalii";
 	
-	//-----------------Coloane Sala-------------
-	private static final String ID_SALA = "id";
+	//-----------------Coloane Locuri_sala-------------
+	private static final String ID_LOC = "id";
 	private static final String NR_LOC="nr_loc";
 	private static final String NR_RAND="nr_rand";
 	
 	//--------------Coloane Rezervare---------------
 	private static final String ID_REZERVARE = "id_rezervare";
-	
-	//--------------Coloane Locuri_ocupate---------------
-	private static final String ID_LOC_OCUPAT = "id_loc";
-		
-	
+
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		String CREATE_UTILIZATORI = "CREATE TABLE " + TABELA_UTILIZATORI + "(" + ID_UTILIZATOR + " INTEGER PRIMARY KEY, " + 
@@ -95,22 +91,23 @@ public class DatabaseController extends SQLiteOpenHelper {
 				+ PRET + " TEXT," + DETALII + " TEXT " + ")";
 		database.execSQL(CREATE_PIESA);
 		
-		String CREATE_SALA = "CREATE TABLE" + TABELA_SALA + "(" + 
-		ID_SALA + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NR_LOC +" INTEGER, " + 
+		String CREATE_LOCURI_SALA = "CREATE TABLE" + TABELA_LOCURI_SALA + "(" + 
+		ID_LOC + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NR_LOC +" INTEGER, " + 
 				NR_RAND + " INTEGER, " + ")";
-		database.execSQL(CREATE_SALA);
+		database.execSQL(CREATE_LOCURI_SALA);
 		
-		String CREATE_LOCURI_OCUPATE = " CREATE TABLE " + TABELA_LOCURI_OCUPATE + "(" + ID_LOC_OCUPAT + " INTEGER PRIMARY KEY, " + 
+		String CREATE_LOCURI_OCUPATE = " CREATE TABLE " + TABELA_LOCURI_OCUPATE + "(" + "FOREIGN KEY " +  "(" + ID_LOC + ")"
+		+ " REFERENCES " + TABELA_LOCURI_SALA +  "( " + ID_LOC + "), " +
 				 "FOREIGN KEY " +  "(" + ID_PIESA + ")" + " REFERENCES " + TABELA_PIESE + 
-				 "(ID_PIESA), " + "FOREIGN KEY (ID_REZERVARE) REFERENCES " +
-			TABELA_REZERVARE + "(ID_REZERVARE) " + "FOREIGN KEY (ID_SALA) REFERENCES " +
-			TABELA_SALA + "(ID_SALA) " +  ")";
+				 "(" + ID_PIESA + "), " + "FOREIGN KEY ( " + ID_REZERVARE + ") REFERENCES " + 
+				 TABELA_REZERVARE + "( " + ID_REZERVARE + " ) " +")";
+		
 		database.execSQL(CREATE_LOCURI_OCUPATE);
 		
 		String CREATE_REZERVARE = "CREATE TABLE " + TABELA_REZERVARE + "(" + ID_REZERVARE + " INTEGER PRIMARY KEY, " + 
 				 "FOREIGN KEY " +  "(" + ID_PIESA + ")" + " REFERENCES " + TABELA_PIESE + 
-				 "(ID_PIESA), " + "FOREIGN KEY (ID_UTILIZATOR) REFERENCES " +
-			TABELA_UTILIZATORI + "(ID_UTILIZATOR) " + ")";
+				 "(" + ID_PIESA + "), " + "FOREIGN KEY (" + ID_UTILIZATOR + ") REFERENCES "
+				 +TABELA_UTILIZATORI + "( " + ID_UTILIZATOR + ") " + ")";
 		database.execSQL(CREATE_REZERVARE);
 		 
 		
@@ -428,28 +425,60 @@ public class DatabaseController extends SQLiteOpenHelper {
 	}
 	
 	//------------------------Interogari Tabela Sala-------------
-//	public ArrayList<Piesa> getPiesa() {
-//		SQLiteDatabase db = this.getReadableDatabase();
-//		String sql = "SELECT * FROM " + TABELA_PIESE;
-//		Cursor cursor = db.rawQuery(sql, null);
-//		ArrayList<Piesa> piese = new ArrayList<Piesa>();
-//
-//		if (cursor.moveToFirst()) {
-//			while (cursor.isAfterLast() == false) {
-//				Piesa piesa= new Piesa(cursor.getInt(cursor.getColumnIndex(ID_PIESA)), 
-//						cursor.getString(cursor.getColumnIndex(NUME_PIESA)),
-//						cursor.getString(cursor.getColumnIndex(DATA)), 
-//						cursor.getString(cursor.getColumnIndex(DURATA)),
-//						cursor.getString(cursor.getColumnIndex(PRET)),
-//						cursor.getString(cursor.getColumnIndex(DETALII)));
-//				piese.add(piesa);
-//				cursor.moveToNext();
-//			}
-//		}
-//		cursor.close();
-//		db.close();
-//
-//		return piese;
-//	}
+	public ArrayList<Locuri_Sala> getLocuriSala() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "SELECT * FROM " + TABELA_LOCURI_SALA;
+		Cursor cursor = db.rawQuery(sql, null);
+		ArrayList<Locuri_Sala> toateLocuriSala = new ArrayList<Locuri_Sala>();
+
+		if (cursor.moveToFirst()) {
+			while (cursor.isAfterLast() == false) {
+				Locuri_Sala locSala= new Locuri_Sala(cursor.getInt(cursor.getColumnIndex(ID_LOC)), 
+						cursor.getInt(cursor.getColumnIndex(NR_LOC)), 
+						cursor.getInt(cursor.getColumnIndex(NR_RAND)));
+						//cursor.getString(cursor.getColumnIndex(OCUPAT)));
+						
+				toateLocuriSala.add(locSala);
+				cursor.moveToNext();
+			}
+		}
+		cursor.close();
+		db.close();
+
+		return toateLocuriSala;
+	}
+	
+	//----------------- Locuri_ocupate-----------
+	public ArrayList<Locuri_Sala> findByPiesa(Piesa piesa){
+		SQLiteDatabase db = this.getReadableDatabase();
+		String sql = "SELECT * FROM " + TABELA_LOCURI_OCUPATE + "  WHERE " + ID_PIESA + " = " + piesa ;
+		Cursor cursor = db.rawQuery(sql, null);
+		ArrayList<Locuri_Ocupate> locuriSala = new ArrayList<Locuri_Ocupate>();
+
+		if (cursor.moveToFirst()) {
+			while (cursor.isAfterLast() == false) {
+				Locuri_Ocupate locSala= new Locuri_Ocupate(cursor.getInt(cursor.getColumnIndex(ID_LOC)));
+				locuriSala.add(locSala);
+				cursor.moveToNext();
+			}
+		}
+		cursor.close();
+		db.close();
+		
+		ArrayList<Locuri_Sala> toateLocurile = getLocuriSala();
+		for(Locuri_Ocupate ocupate : locuriSala){
+			for(Locuri_Sala totale : toateLocurile){
+				if(ocupate.getId_loc()==totale.getId_loc()){
+					totale.setOcupat(true);
+				}
+			}
+		}
+		return toateLocurile;
+		
+	}
+	
+	
+	
+	
 
 }

@@ -25,8 +25,8 @@ public class ListaActori extends MainActivity {
 	
 		actori = new ArrayList<Actor>();
 		
-		dbc.inserareActor(new Actor(1,"Mihai Bendeac","Aici este biografia lui Mihai Bendeac"));
-		dbc.inserareActor(new Actor(2, "Stefan Banica Jr","Aici este o biografie"));
+//		dbc.inserareActor(new Actor(1,"Mihai Bendeac","Aici este biografia lui Mihai Bendeac"));
+//		dbc.inserareActor(new Actor(2, "Stefan Banica Jr","Aici este o biografie"));
 		actori = dbc.getNumeActor();
 		String[] act = new String[actori.size()];
 		for(int i=0; i<actori.size();i++){

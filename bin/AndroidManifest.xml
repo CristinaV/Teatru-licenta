@@ -31,6 +31,7 @@
         <activity android:name=".Rezervare"/>
         <activity android:name=".PiesaDetalii"/>
         <activity android:name=".BiografiiListaActori"/>
+        <activity android:name=".Afisare_diagrama"/>
        
     
     </application>
